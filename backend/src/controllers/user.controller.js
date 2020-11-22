@@ -1,5 +1,7 @@
 const modelUser = require("../models/user.model")
 const jwt = require("jsonwebtoken")
+const createSearchParams = require("../utils/createSearchParams")
+
 
 
 class ControllerUser {
@@ -31,6 +33,23 @@ class ControllerUser {
 
 
     }
+    loginUsers = async(req, res) => {
+        try {
+            const datos = createSearchParams(req.query)
+            const [user] = await modelUser.find({ name: 'John' });
+            const validate = await
+            await user.comparePassword(datos.password)
+
+            if (validate) {
+                res.status(200).json(user)
+            } else {
+                res.status(200).json("Error en password")
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 }
 
 const controllerUser = new ControllerUser()

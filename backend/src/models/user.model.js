@@ -34,11 +34,12 @@ const userSchema = new Schema({
 userSchema.methods.encryptPassword = async function() {
     this.password = await bcrypt.hash(this.password, 8)
 }
-userSchema.methods.encryptIp = async function() {
-    this.ip = await bcrypt.hash(this.ip, 8)
-}
+
 userSchema.methods.comparePassword = async function(users) {
     return await bcrypt.compare(users, this.password)
+}
+userSchema.methods.encryptIp = async function() {
+    this.ip = await bcrypt.hash(this.ip, 8)
 }
 
 
