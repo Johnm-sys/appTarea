@@ -35,15 +35,20 @@ class ControllerUser {
     }
     loginUsers = async(req, res) => {
         try {
+            //console.log(req.user);
+            const user = req.user
             const datos = createSearchParams(req.query)
-            const [user] = await modelUser.find({ name: 'John' });
-            const validate = await
-            await user.comparePassword(datos.password)
+            if (user) {
+                const validate = await user.comparePassword(datos.password)
+                await user.comparePassword(datos.password)
 
-            if (validate) {
-                res.status(200).json(user)
+                if (validate) {
+                    res.status(200).json(user)
+                } else {
+                    res.status(200).json("Error en password")
+                }
             } else {
-                res.status(200).json("Error en password")
+                res.status(200).json("No se encontro al usuario")
             }
         } catch (error) {
             console.log(error);

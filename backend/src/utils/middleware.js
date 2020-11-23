@@ -1,13 +1,16 @@
 const jwt = require("jsonwebtoken")
+const modelUser = require("../models/user.model")
 
 const authMiddleware = async function(req, res, next) {
-    console.log(" middleware")
-    console.log(req.headers)
-    const token = req.headers["Authentication"] ? req.headers["Authentication"].replace("Bearer ", "") : null
+    //console.log("entro middleware")
+    //console.log(req.headers.authentication)
+    const token = req.headers["authentication"] ? req.headers["authentication"].replace("cats ", "") : null
     try {
         const userId = jwt.verify(token, process.env.SECRET_KEY)
-        const user = await form.findOne({ _id: userId })
+        const user = await modelUser.findOne({ _id: userId.userId })
+            //console.log(user);
         if (!user) return res.status(404).json("the user asigned to this token can no longer be found. Please verify if the account still exist")
+
         req.user = user
         req.token = token
         next()
