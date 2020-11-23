@@ -24,7 +24,6 @@ class ControllerUser {
             //const user = req.user
             const datos = createSearchParams(req.query)
             const user = req.user
-                //await modelUser.find({ userName: datos.userName });
             if (user) {
                 const validate = await user.comparePassword(datos.password)
                     //await user.comparePassword(datos.password)
