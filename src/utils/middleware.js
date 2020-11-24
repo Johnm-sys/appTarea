@@ -13,7 +13,7 @@ const authMiddleware = async function(req, res, next) {
 
         next()
     } catch (err) {
-        res.status(401).json("the user is not authorized. Please provide a valid token to proceed")
+        res.status(401).json(err.message, "  the user is not authorized. Please provide a valid token to proceed")
     }
 }
 
