@@ -23,6 +23,17 @@ class ControlerHwork {
         }
 
     }
+    deleteHwork = async(req, res) => {
+        try {
+            const homework = await modelHwork.deleteOne({ _id: req.body.id });
+            res.status(200).json(homework)
+        } catch (error) {
+            console.log(error.message)
+            res.status(401).json(error)
+        }
+
+
+    }
     showHwork = async(req, res) => {
         try {
             const datos = createSearchParams(req.query)

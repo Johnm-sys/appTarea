@@ -23,8 +23,8 @@ class ControllerUser {
     loginUsers = async(req, res) => {
         try {
             //const user = req.user
-            const datos = createSearchParams(req.query)
-            const user = req.user
+            const datos = createSearchParams(req.query);
+            const user = await modelUser.findOne({ userName: datos.userName });
             if (user) {
                 const validate = await user.comparePassword(datos.password)
 
