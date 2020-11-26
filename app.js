@@ -16,8 +16,7 @@ app.use(helmet())
 app.use(cors())
 
 app.get("/", (req, res) => {
-    console.log("funciona")
-    res.send("servidor conectado")
+    res.send("JKE connected server")
 })
 app.use("/user", routeUser)
 app.use("/homework", routeHwork)
